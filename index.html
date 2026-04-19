@@ -22,7 +22,6 @@
             justify-content: center;
         }
 
-        /* Container utama seukuran layar HP */
         .app-container {
             width: 100%;
             max-width: 420px;
@@ -33,245 +32,135 @@
             box-shadow: 0 0 20px rgba(0,0,0,0.05);
         }
 
-        /* Halaman */
         .page {
             padding: 24px;
             display: none;
             animation: fadeIn 0.4s ease-in-out;
-            padding-bottom: 120px; /* Space for checkout bar */
+            padding-bottom: 120px; 
         }
-        .page.active {
-            display: block;
-        }
+        .page.active { display: block; }
 
-        /* Typography */
-        h1.title {
-            font-size: 32px;
-            font-weight: 800;
-            margin-bottom: 8px;
-        }
-        p.subtitle {
-            font-size: 14px;
-            font-style: italic;
-            color: #333;
-            margin-bottom: 30px;
-        }
+        h1.title { font-size: 32px; font-weight: 800; margin-bottom: 8px; }
+        p.subtitle { font-size: 14px; font-style: italic; color: #333; margin-bottom: 30px; }
 
-        /* Product List */
-        .product-list {
-            display: flex;
-            flex-direction: column;
-            gap: 20px;
-        }
-
+        .product-list { display: flex; flex-direction: column; gap: 20px; }
         .product-card {
-            display: flex;
-            align-items: center;
-            gap: 16px;
+            display: flex; align-items: center; gap: 16px;
             animation: slideUpFade 0.5s ease-out backwards;
+            background: #fff;
+            padding: 10px;
+            border-radius: 12px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+            border: 1px solid #f0f0f0;
         }
         
-        /* Staggered animation untuk list produk */
         .product-card:nth-child(1) { animation-delay: 0.1s; }
         .product-card:nth-child(2) { animation-delay: 0.2s; }
         .product-card:nth-child(3) { animation-delay: 0.3s; }
         .product-card:nth-child(4) { animation-delay: 0.4s; }
 
         .product-img {
-            width: 100px;
-            height: 100px;
-            aspect-ratio: 1 / 1;
-            object-fit: cover;
-            border-radius: 4px;
-            background-color: #000; /* Fallback color */
+            width: 80px; height: 80px; aspect-ratio: 1 / 1;
+            object-fit: cover; border-radius: 8px; background-color: #f0f0f0;
         }
 
-        .product-info {
-            flex: 1;
-        }
+        .product-info { flex: 1; }
+        .product-name { font-size: 16px; font-weight: 700; margin-bottom: 4px; }
+        .product-price { font-size: 14px; color: #555; font-style: italic; }
+        .topping-badge { font-size: 12px; color: #ff0044; font-weight: 600; display: block; margin-top: 4px;}
 
-        .product-name {
-            font-size: 18px;
-            font-weight: 700;
-            margin-bottom: 4px;
-        }
-
-        .product-price {
-            font-size: 14px;
-            color: #333;
-            font-style: italic;
-        }
-
-        /* Tombol & Kontrol Kuantitas */
-        .action-area {
-            min-width: 40px;
-            display: flex;
-            justify-content: flex-end;
-        }
-
+        .action-area { min-width: 80px; display: flex; justify-content: flex-end; }
         .btn-add {
-            background: none;
-            border: none;
-            color: #ff0044;
-            font-size: 28px;
-            font-weight: bold;
-            cursor: pointer;
-            transition: transform 0.2s;
+            background: #ff0044; color: white; border: none; border-radius: 8px;
+            width: 32px; height: 32px; font-size: 20px;
+            font-weight: bold; cursor: pointer; transition: transform 0.2s;
+            display: flex; align-items: center; justify-content: center;
         }
-        .btn-add:active {
-            transform: scale(0.8);
-        }
+        .btn-add:active { transform: scale(0.9); }
 
         .qty-control {
-            display: flex;
-            align-items: center;
-            background-color: #ff0044;
-            color: white;
-            border-radius: 6px;
-            overflow: hidden;
-            font-weight: bold;
+            display: flex; align-items: center; background-color: #ff0044;
+            color: white; border-radius: 8px; overflow: hidden; font-weight: bold;
             animation: popIn 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
         }
-
-        .qty-btn {
-            background: none;
-            border: none;
-            color: white;
-            padding: 6px 12px;
-            font-size: 16px;
-            cursor: pointer;
-        }
+        .qty-btn { background: none; border: none; color: white; padding: 6px 12px; font-size: 16px; cursor: pointer; }
         .qty-btn:active { background-color: #cc0036; }
-        .qty-val {
-            padding: 6px 4px;
-            font-size: 14px;
-            min-width: 20px;
+        .qty-val { padding: 6px 4px; font-size: 14px; min-width: 24px; text-align: center; }
+
+        .checkout-bar {
+            position: fixed; bottom: 0; left: 50%; transform: translateX(-50%) translateY(100%);
+            width: 100%; max-width: 420px; background-color: #ff0044; color: white;
+            padding: 16px 24px; border-top-left-radius: 20px; border-top-right-radius: 20px;
+            display: flex; justify-content: space-between; align-items: center;
+            transition: transform 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275); z-index: 10; cursor: pointer;
+            box-shadow: 0 -4px 12px rgba(255, 0, 68, 0.3);
+        }
+        .checkout-bar.show { transform: translateX(-50%) translateY(0); }
+        .checkout-info .total-text { font-size: 18px; font-weight: 700; }
+        .checkout-info .checkout-sub { font-size: 12px; font-style: italic; opacity: 0.9; margin-top: 2px; }
+        .checkout-btn-text { font-size: 16px; font-weight: 700; background: white; color: #ff0044; padding: 8px 16px; border-radius: 20px;}
+
+        /* --- MODAL (POP UP) STYLING --- */
+        .modal-overlay {
+            position: fixed; top: 0; left: 50%; transform: translateX(-50%);
+            width: 100%; max-width: 420px; height: 100%; background: rgba(0,0,0,0.6);
+            display: none; justify-content: center; align-items: center; z-index: 999;
+            opacity: 0; transition: opacity 0.3s;
+        }
+        .modal-overlay.active { display: flex; opacity: 1; }
+        .modal-box {
+            background: #fff; padding: 24px; border-radius: 16px; width: 85%;
+            text-align: center; animation: popIn 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+        }
+        .modal-title { font-size: 18px; font-weight: 700; margin-bottom: 8px; }
+        .modal-desc { font-size: 14px; color: #555; margin-bottom: 20px; line-height: 1.4;}
+        
+        /* Input Nama */
+        .input-name {
+            width: 100%; padding: 12px; margin-bottom: 20px; border: 1.5px solid #ddd;
+            border-radius: 8px; font-size: 16px; font-family: 'Inter', sans-serif;
             text-align: center;
         }
+        .input-name:focus { outline: none; border-color: #ff0044; }
 
-        /* Checkout Bar */
-        .checkout-bar {
-            position: fixed;
-            bottom: 0;
-            left: 50%;
-            transform: translateX(-50%) translateY(100%);
-            width: 100%;
-            max-width: 420px;
-            background-color: #ff0044;
-            color: white;
-            padding: 16px 24px;
-            border-top-left-radius: 16px;
-            border-top-right-radius: 16px;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            transition: transform 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-            z-index: 10;
-            cursor: pointer;
+        .modal-buttons { display: flex; gap: 10px; }
+        .btn-modal {
+            flex: 1; padding: 12px; border: none; border-radius: 8px;
+            font-weight: bold; font-size: 14px; cursor: pointer;
         }
-        .checkout-bar.show {
-            transform: translateX(-50%) translateY(0);
-        }
-
-        .checkout-info .total-text {
-            font-size: 20px;
-            font-weight: 700;
-        }
-        .checkout-info .checkout-sub {
-            font-size: 12px;
-            font-style: italic;
-            opacity: 0.9;
-            margin-top: 2px;
-        }
-        .checkout-btn-text {
-            font-size: 16px;
-            font-weight: 700;
-        }
+        .btn-modal-primary { background: #ff0044; color: white; }
+        .btn-modal-secondary { background: #f0f0f0; color: #333; }
 
         /* --- STYLING HALAMAN STRUK --- */
-        .receipt-header {
-            text-align: center;
-            margin-bottom: 30px;
-        }
+        .receipt-header { text-align: center; margin-bottom: 20px; }
+        .receipt-logo { width: 120px; height: auto; border-radius: 50%; object-fit: contain; margin-bottom: 10px; box-shadow: 0 4px 10px rgba(0,0,0,0.1);}
         
-        .receipt-logo {
-            width: 150px;
-            aspect-ratio: 1 / 1;
-            object-fit: contain;
-            margin-bottom: 10px;
-        }
+        .receipt-title-area { margin-bottom: 20px; border-bottom: 1px dashed #ccc; padding-bottom: 16px;}
+        .receipt-title { font-size: 24px; font-weight: 800; }
+        .receipt-customer { font-size: 16px; font-weight: 700; color: #ff0044; margin-top: 8px; }
 
-        .receipt-title {
-            font-size: 24px;
-            font-weight: 800;
-            text-align: left;
-            margin-bottom: 20px;
-        }
+        .receipt-items { display: flex; flex-direction: column; gap: 12px; margin-bottom: 20px; }
+        .receipt-row { display: flex; justify-content: space-between; align-items: baseline; font-size: 14px; }
+        .receipt-row .item-name { font-weight: 600; }
+        .receipt-row .dots { flex-grow: 1; border-bottom: 1px dotted #ccc; margin: 0 10px; position: relative; top: -4px; }
+        .receipt-row.total-row { font-weight: 800; font-size: 18px; margin-top: 10px; color: #ff0044; border-top: 2px dashed #ccc; padding-top: 16px;}
 
-        .receipt-items {
-            display: flex;
-            flex-direction: column;
-            gap: 12px;
-            margin-bottom: 20px;
-        }
+        .receipt-footer { margin-top: 30px; font-size: 12px; font-style: italic; color: #555; line-height: 1.6; text-align: center;}
+        .receipt-footer p { margin-bottom: 12px; }
 
-        .receipt-row {
-            display: flex;
-            justify-content: space-between;
-            align-items: baseline;
-            font-size: 14px;
-            font-style: italic;
+        .btn-email {
+            display: block; width: 100%; padding: 14px; margin-top: 30px; background-color: #ff0044;
+            color: white; border: none; border-radius: 12px; font-weight: bold; font-size: 16px; cursor: pointer; margin-bottom: 12px;
+            box-shadow: 0 4px 10px rgba(255, 0, 68, 0.3);
         }
-
-        .receipt-row .dots {
-            flex-grow: 1;
-            border-bottom: 2px dotted #ccc;
-            margin: 0 10px;
-            position: relative;
-            top: -4px;
-        }
-
-        .receipt-row.total-row {
-            font-weight: 700;
-            font-size: 16px;
-            margin-top: 10px;
-            font-style: italic;
-        }
-
-        .receipt-footer {
-            margin-top: 40px;
-            font-size: 12px;
-            font-style: italic;
-            color: #333;
-            line-height: 1.6;
-        }
-        .receipt-footer p { margin-bottom: 16px; }
-
         .btn-back {
-            display: block;
-            width: 100%;
-            padding: 12px;
-            margin-top: 20px;
-            background-color: #f0f0f0;
-            border: none;
-            border-radius: 8px;
-            font-weight: bold;
-            cursor: pointer;
+            display: block; width: 100%; padding: 14px; background-color: #f0f0f0; border: none;
+            border-radius: 12px; font-weight: bold; font-size: 16px; cursor: pointer; color: #333;
         }
 
-        /* Keyframes Animasi */
-        @keyframes fadeIn {
-            from { opacity: 0; }
-            to { opacity: 1; }
-        }
-        @keyframes slideUpFade {
-            from { opacity: 0; transform: translateY(20px); }
-            to { opacity: 1; transform: translateY(0); }
-        }
-        @keyframes popIn {
-            0% { transform: scale(0.5); opacity: 0; }
-            100% { transform: scale(1); opacity: 1; }
-        }
+        @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
+        @keyframes slideUpFade { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: translateY(0); } }
+        @keyframes popIn { 0% { transform: scale(0.8); opacity: 0; } 100% { transform: scale(1); opacity: 1; } }
     </style>
 </head>
 <body>
@@ -280,80 +169,119 @@
     
     <div id="menu-page" class="page active">
         <h1 class="title">Price List</h1>
-        <p class="subtitle">Pilih Menu yang kamu inginkan untuk Menemanimu hari ini</p>
-        
+        <p class="subtitle">Pilih Menu yang kamu inginkan untuk menemanimu hari ini di Potret Aksi Cafe</p>
         <div class="product-list" id="product-list"></div>
     </div>
 
     <div id="receipt-page" class="page">
         <div class="receipt-header">
-            <img src="potretaksicafe.jpg" alt="Logo Potret Aksi Cafe" class="receipt-logo">
+            <img src="potretaksicafe.jpg" alt="Logo Potret Aksi Cafe" class="receipt-logo" onerror="this.src='https://placehold.co/150x150/ff0044/ffffff?text=Logo'">
         </div>
 
-        <h2 class="receipt-title">Struck</h2>
+        <div class="receipt-title-area">
+            <h2 class="receipt-title">Struk Pesanan</h2>
+            <div class="receipt-customer" id="receipt-customer-name">Pemesan: -</div>
+        </div>
 
-        <div class="receipt-items" id="receipt-items">
-            </div>
+        <div class="receipt-items" id="receipt-items"></div>
 
         <div class="receipt-row total-row">
-            <span>Total</span>
-            <div class="dots"></div>
+            <span>Total Bayar</span>
+            <div class="dots" style="border: none;"></div>
             <span id="receipt-total">0</span>
         </div>
 
         <div class="receipt-footer">
-            <p>Screenshoot Struk dan hasil transaksi Ke kasir dan pesanan anda akan di siapkan.</p>
-            <p>Jika Ada kritik Atau saran agar PotretHausdrink bisa Berkembang Lebih baik lagi silahkan kirim melalui DM Akun Instagram Kami yakni @PotretAksi.id</p>
-            <p>Terima Kasih Sudah Membeli Produk kami semoga Suka ya... Selamat Menikmati...</p>
+            <p>Screenshot Struk dan hasil transaksi ke kasir, pesanan Anda akan segera disiapkan.</p>
+            <p>Kritik & saran agar kami berkembang lebih baik, silakan kirim melalui DM Instagram kami <b>@PotretAksi.id</b></p>
+            <p>Terima Kasih sudah membeli produk kami. Selamat menikmati!</p>
         </div>
         
-        <button class="btn-back" onclick="resetOrder()">Pesan Lagi</button>
+        <button class="btn-email" onclick="kirimEmail()">Kirim Pesanan ke Admin (Email)</button>
+        <button class="btn-back" onclick="resetOrder()">Buat Pesanan Baru</button>
     </div>
 
-    <div id="checkout-bar" class="checkout-bar" onclick="goToReceipt()">
+    <div id="checkout-bar" class="checkout-bar" onclick="openNameModal()">
         <div class="checkout-info">
             <div class="total-text" id="checkout-total">Total 0</div>
-            <div class="checkout-sub">Silahkan lanjut ke pembayaran</div>
+            <div class="checkout-sub">Ketuk untuk melanjutkan</div>
         </div>
         <div class="checkout-btn-text">Check Out</div>
+    </div>
+
+    <div id="topping-modal" class="modal-overlay">
+        <div class="modal-box">
+            <h3 class="modal-title">Tambah Topping Cincau?</h3>
+            <p class="modal-desc">Ingin menambahkan topping cincau segar ke Brown Sugar pesananmu?</p>
+            <div class="modal-buttons">
+                <button class="btn-modal btn-modal-primary" onclick="confirmTopping('Cincau', 1000)">Pakai (+Rp 1.000)</button>
+                <button class="btn-modal btn-modal-secondary" onclick="confirmTopping(null, 0)">Tidak (Rp 0)</button>
+            </div>
+        </div>
+    </div>
+
+    <div id="name-modal" class="modal-overlay">
+        <div class="modal-box">
+            <h3 class="modal-title">Siapa Nama Kamu?</h3>
+            <p class="modal-desc">Masukkan nama agar kami mudah mengantarkan pesananmu.</p>
+            <input type="text" id="input-customer-name" class="input-name" placeholder="Ketik nama Anda di sini...">
+            <div class="modal-buttons">
+                <button class="btn-modal btn-modal-secondary" onclick="closeNameModal()">Batal</button>
+                <button class="btn-modal btn-modal-primary" onclick="proceedToCheckout()">Lihat Struk</button>
+            </div>
+        </div>
     </div>
 
 </div>
 
 <script>
-    // Data Produk (Silahkan ganti URL src gambarnya dengan foto asli)
+    // --- DATA PRODUK & GAMBAR ---
     const products = [
         { id: 1, name: "Matcha Latte", price: 6000, img: "matchalatte.png" },
         { id: 2, name: "Thai Tea", price: 6000, img: "thaitea.png" },
-        { id: 3, name: "Brown Sugar", price: 6000, img: "brownsugar.png" },
-        { id: 4, name: "Salt Popcorn", price: 5000, img: "popcornsalt.png" }
+        { id: 3, name: "Brown Sugar", price: 6000, img: "brownsugar.png" }, // ID 3 Khusus ada topping
+        { id: 4, name: "Salt Popcorn", price: 5000, img: "popcornsalt.png" } // Asumsi harga popcorn 5000, silakan ubah jika perlu
     ];
 
-    let cart = {}; // Menyimpan keranjang belanja { productId: quantity }
+    const emailPenjual = "akbarsurya883@gmail.com";
 
-    // Format Rupiah (cth: 8.000)
-    function formatPrice(number) {
-        return number.toLocaleString('id-ID');
+    // Struktur Cart: Menyimpan pesanan dan detail topping per produk
+    let cart = {}; 
+    let customerName = "";
+    let pendingProductId = null;
+
+    function formatPrice(number) { 
+        return number.toLocaleString('id-ID'); 
     }
 
-    // Render Menu Produk
+    // --- FUNGSI RENDER MENU ---
     function renderMenu() {
         const productListEl = document.getElementById('product-list');
         productListEl.innerHTML = '';
 
         products.forEach(product => {
-            const qty = cart[product.id] || 0;
+            const cartItem = cart[product.id];
+            const qty = cartItem ? cartItem.qty : 0;
             
-            // Logika UI Kolom Tambah / Plus-Minus
+            // Hitung harga akhir jika ada topping
+            let displayPrice = product.price;
+            let toppingText = '';
+            if (cartItem && cartItem.toppingName) {
+                displayPrice += cartItem.toppingPrice;
+                toppingText = `<span class="topping-badge">+ Topping ${cartItem.toppingName}</span>`;
+            }
+
             let actionHtml = '';
+            // Jika belum ada pesanan untuk produk ini, tampilkan tombol [+]
             if (qty === 0) {
-                actionHtml = `<button class="btn-add" onclick="updateCart(${product.id}, 1)">+</button>`;
+                actionHtml = `<button class="btn-add" onclick="handleAdd(${product.id})">+</button>`;
             } else {
+                // Jika sudah ada pesanan, tampilkan tombol kontrol [-] qty [+]
                 actionHtml = `
                     <div class="qty-control">
-                        <button class="qty-btn" onclick="updateCart(${product.id}, 1)">+</button>
+                        <button class="qty-btn" onclick="handleMinus(${product.id})">-</button>
                         <span class="qty-val">${qty}</span>
-                        <button class="qty-btn" onclick="updateCart(${product.id}, -1)">-</button>
+                        <button class="qty-btn" onclick="handlePlus(${product.id})">+</button>
                     </div>
                 `;
             }
@@ -361,10 +289,11 @@
             const card = document.createElement('div');
             card.className = 'product-card';
             card.innerHTML = `
-                <img src="${product.img}" class="product-img" alt="${product.name}">
+                <img src="${product.img}" class="product-img" alt="${product.name}" onerror="this.src='https://placehold.co/100x100/dddddd/555555?text=No+Image'">
                 <div class="product-info">
                     <div class="product-name">${product.name}</div>
-                    <div class="product-price">Price ${formatPrice(product.price)}</div>
+                    <div class="product-price">Rp ${formatPrice(displayPrice)}</div>
+                    ${toppingText}
                 </div>
                 <div class="action-area">
                     ${actionHtml}
@@ -376,102 +305,180 @@
         updateCheckoutBar();
     }
 
-    // Fungsi Tambah/Kurang pesanan
-    function updateCart(productId, change) {
-        if (!cart[productId]) cart[productId] = 0;
-        
-        cart[productId] += change;
-        
-        if (cart[productId] <= 0) {
-            delete cart[productId];
+    // --- LOGIKA TOMBOL TAMBAH (+) PERTAMA KALI ---
+    function handleAdd(productId) {
+        // Jika yang diklik adalah Brown Sugar (ID 3), munculkan pop-up topping
+        if (productId === 3) {
+            pendingProductId = productId;
+            document.getElementById('topping-modal').classList.add('active');
+        } else {
+            // Produk lain langsung masuk keranjang
+            cart[productId] = { qty: 1, toppingName: null, toppingPrice: 0 };
+            renderMenu();
         }
-        
-        renderMenu(); // Re-render menu
     }
 
-    // Memperbarui dan Memunculkan Bar Checkout
+    // --- LOGIKA KONFIRMASI TOPPING (Khusus Brown Sugar) ---
+    function confirmTopping(toppingName, toppingPrice) {
+        // Simpan data produk Brown Sugar ke keranjang beserta pilihan toppingnya
+        cart[pendingProductId] = { 
+            qty: 1, 
+            toppingName: toppingName, 
+            toppingPrice: toppingPrice 
+        };
+        
+        // Tutup modal dan reset pending
+        document.getElementById('topping-modal').classList.remove('active');
+        pendingProductId = null;
+        renderMenu();
+    }
+
+    // --- LOGIKA TAMBAH/KURANG QUANTITY ---
+    function handlePlus(productId) {
+        if (cart[productId]) {
+            cart[productId].qty += 1;
+            renderMenu();
+        }
+    }
+
+    function handleMinus(productId) {
+        if (cart[productId]) {
+            cart[productId].qty -= 1;
+            if (cart[productId].qty <= 0) {
+                delete cart[productId]; // Hapus item jika kuantitas jadi 0
+            }
+            renderMenu();
+        }
+    }
+
+    // --- UPDATE BAR CHECKOUT BAWAH ---
     function updateCheckoutBar() {
         let total = 0;
         let totalItems = 0;
 
-        for (const [id, qty] of Object.entries(cart)) {
+        for (const [id, item] of Object.entries(cart)) {
             const product = products.find(p => p.id == id);
-            total += product.price * qty;
-            totalItems += qty;
+            const itemFinalPrice = product.price + item.toppingPrice;
+            total += itemFinalPrice * item.qty;
+            totalItems += item.qty;
         }
 
         const bar = document.getElementById('checkout-bar');
         const totalText = document.getElementById('checkout-total');
 
         if (totalItems > 0) {
-            totalText.innerText = `Total ${formatPrice(total)}`;
+            totalText.innerText = `Total Rp ${formatPrice(total)}`;
             bar.classList.add('show');
         } else {
             bar.classList.remove('show');
         }
     }
 
-    // Navigasi ke halaman Struk
-    function goToReceipt() {
-        // Sembunyikan halaman menu & checkout bar
+    // --- MODAL NAMA PEMESAN SEBELUM CHECKOUT ---
+    function openNameModal() {
+        document.getElementById('name-modal').classList.add('active');
+        document.getElementById('input-customer-name').focus();
+    }
+
+    function closeNameModal() {
+        document.getElementById('name-modal').classList.remove('active');
+    }
+
+    // --- PROSES KE HALAMAN STRUK ---
+    function proceedToCheckout() {
+        const nameInput = document.getElementById('input-customer-name').value.trim();
+        
+        if (nameInput === "") {
+            alert("Mohon masukkan nama Anda terlebih dahulu!");
+            return;
+        }
+
+        customerName = nameInput;
+        closeNameModal();
+
+        // Ganti tampilan ke Halaman Struk
         document.getElementById('menu-page').classList.remove('active');
         document.getElementById('checkout-bar').classList.remove('show');
-        
-        // Tampilkan halaman struk
         document.getElementById('receipt-page').classList.add('active');
         window.scrollTo(0, 0);
 
         renderReceipt();
     }
 
-    // Render Data di halaman Struk
+    // --- TAMPILKAN STRUK PESANAN ---
     function renderReceipt() {
+        document.getElementById('receipt-customer-name').innerText = `Pemesan: ${customerName}`;
+        
         const receiptItemsEl = document.getElementById('receipt-items');
         receiptItemsEl.innerHTML = '';
         let total = 0;
 
-        // Loop item di keranjang
-        for (const [id, qty] of Object.entries(cart)) {
+        for (const [id, item] of Object.entries(cart)) {
             const product = products.find(p => p.id == id);
-            const subtotal = product.price * qty;
+            const itemFinalPrice = product.price + item.toppingPrice;
+            const subtotal = itemFinalPrice * item.qty;
             total += subtotal;
+
+            // Jika ada topping, tambahkan embel-embel nama topping
+            const displayName = item.toppingName ? `${product.name} (+${item.toppingName})` : product.name;
 
             receiptItemsEl.innerHTML += `
                 <div class="receipt-row">
-                    <span>${product.name}</span>
+                    <span class="item-name">${displayName} (${item.qty}x)</span>
                     <div class="dots"></div>
-                    <span>${qty}x</span>
-                </div>
-                <div class="receipt-row" style="margin-bottom: 8px;">
-                    <span>Price Rp ${formatPrice(product.price)}</span>
-                    <div class="dots" style="border-bottom: none;"></div>
-                    <span></span>
+                    <span>Rp ${formatPrice(subtotal)}</span>
                 </div>
             `;
         }
 
-        // Tambah baris Admin Free
-        receiptItemsEl.innerHTML += `
-            <div class="receipt-row" style="margin-top: 10px;">
-                <span>Admin</span>
-                <div class="dots"></div>
-                <span>Free</span>
-            </div>
-        `;
-
-        document.getElementById('receipt-total').innerText = formatPrice(total);
+        // Tampilkan total keseluruhan
+        document.getElementById('receipt-total').innerText = `Rp ${formatPrice(total)}`;
     }
 
-    // Fungsi untuk reset pesanan & kembali ke menu
+    // --- FUNGSI KIRIM PESANAN VIA EMAIL ---
+    function kirimEmail() {
+        const subjek = encodeURIComponent(`Pesanan Baru dari ${customerName} - Potret Aksi Cafe`);
+        
+        let isiPesan = `Halo Admin Potret Aksi Cafe,\n\n`;
+        isiPesan += `Saya ingin memproses pesanan dengan rincian sebagai berikut:\n`;
+        isiPesan += `------------------------------------\n`;
+        isiPesan += `Nama Pemesan: ${customerName}\n`;
+        isiPesan += `------------------------------------\n\n`;
+        
+        let total = 0;
+
+        for (const [id, item] of Object.entries(cart)) {
+            const product = products.find(p => p.id == id);
+            const itemFinalPrice = product.price + item.toppingPrice;
+            const subtotal = itemFinalPrice * item.qty;
+            total += subtotal;
+            
+            const displayName = item.toppingName ? `${product.name} (+${item.toppingName})` : product.name;
+            isiPesan += `- ${displayName} (${item.qty}x) : Rp ${formatPrice(subtotal)}\n`;
+        }
+
+        isiPesan += `\n------------------------------------\n`;
+        isiPesan += `Total Pembayaran: Rp ${formatPrice(total)}\n`;
+        isiPesan += `------------------------------------\n\n`;
+        isiPesan += `Tolong segera diproses ya, Terima kasih!`;
+
+        const formatPesan = encodeURIComponent(isiPesan);
+        window.location.href = `mailto:${emailPenjual}?subject=${subjek}&body=${formatPesan}`;
+    }
+
+    // --- RESET PESANAN ---
     function resetOrder() {
         cart = {};
+        customerName = "";
+        document.getElementById('input-customer-name').value = "";
+        
         document.getElementById('receipt-page').classList.remove('active');
         document.getElementById('menu-page').classList.add('active');
         renderMenu();
         window.scrollTo(0, 0);
     }
 
-    // Inisialisasi awal saat web dibuka
+    // Inisialisasi awal
     renderMenu();
 
 </script>
